@@ -97,4 +97,41 @@ public class Main {
 
         System.out.println(ribbon);
     }
+
+    public static void puzzleThree() throws IOException {
+        File f = new File("C:/Users/Stefano/Desktop/adventP.txt");
+        String content = FileUtils.readFileToString(f, StandardCharsets.UTF_8);
+
+        //String[] lines = content.split("\r\n");
+        int grid[][] = new int[1001][1001];
+        int i=500,j=500;
+        int a=500,b=500;
+        grid[i][j]=2;
+
+        boolean flag = true;
+        for(char c : content.toCharArray()){
+
+            if(flag){
+                if(c=='<')i--;
+                else if(c=='>')i++;
+                else if(c=='^')j--;
+                else j++;
+                grid[i][j]++;
+            }else{
+                if(c=='<')a--;
+                else if(c=='>')a++;
+                else if(c=='^')b--;
+                else b++;
+                grid[a][b]++;
+            }
+            flag=!flag;
+        }
+        int count=0;
+        for(int[] arr : grid){
+            for(int slot : arr){
+                if(slot>0)count++;
+            }
+        }
+        System.out.println(count);
+    }
 }
