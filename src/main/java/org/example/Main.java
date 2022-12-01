@@ -1,50 +1,78 @@
 package org.example;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.time.Duration;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 import java.util.Arrays;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
         File f = new File("C:/Users/Stefano/Desktop/adventP.txt");
         String content = FileUtils.readFileToString(f, StandardCharsets.UTF_8);
 
-        //String[] lines = content.split("\r\n");
-        int grid[][] = new int[1001][1001];
-        int i=500,j=500;
-        int a=500,b=500;
-        grid[i][j]=2;
 
-        boolean flag = true;
-        for(char c : content.toCharArray()){
+        LocalTime lt1 = LocalTime.now();
+        LocalTime lt2 = LocalTime.now().plusHours(10);
+        lt2 = lt2.plusMinutes(35);
+        Duration d = Duration.between(lt1,lt2);
 
-            if(flag){
-                if(c=='<')i--;
-                else if(c=='>')i++;
-                else if(c=='^')j--;
-                else j++;
-                grid[i][j]++;
-            }else{
-                if(c=='<')a--;
-                else if(c=='>')a++;
-                else if(c=='^')b--;
-                else b++;
-                grid[a][b]++;
+        //d.get(ChronoUnit.MINUTES);
+        long ore,minuti;
+        ore = ( d.getSeconds() / 3600);
+        minuti = ( (d.getSeconds() - (ore*3600)) / 60 );
+
+        System.out.println(ore);
+        /*String[] lines = content.split("\r\n");
+
+        int counter = 0;
+
+        boolean a,b,cc;
+
+        for(String s:lines){
+
+            a=false;
+            if ( !s.contains("ab") && !s.contains("cd") && !s.contains("pq") && !s.contains("xy") ) a=true;
+
+            b = false;
+            for(int i=0;i<s.length()-1;i++){
+                if(s.charAt(i) == s.charAt(i+1) ){
+                    b=true;
+                    break;
+                }
             }
-            flag=!flag;
-        }
-        int count=0;
-        for(int[] arr : grid){
-            for(int slot : arr){
-                if(slot>0)count++;
+            if(nic){
+                counter++;
+                continue;
             }
-        }
-        System.out.println(count);
 
-        System.out.println("ddd");
+            cc=false;
+            int vowel=0;
+            for(char c : s.toCharArray()){
+                if(c=='a'||c=='e'||c=='i'||c=='o'||c=='u') vowel++;
+            }
+            if(vowel>2){
+                cc=true;
+            }
+
+            if(a && b && cc){
+                counter++;
+            }
+        }*/
+        // 269 too high
+        //System.out.println(counter);
+
+        System.out.println("End");
     }
 
     public static void puzzleOne() throws IOException {
@@ -133,5 +161,36 @@ public class Main {
             }
         }
         System.out.println(count);
+    }
+
+    public static void puzzle4() throws IOException {
+        File f = new File("C:/Users/Stefano/Desktop/adventP.txt");
+        String content = FileUtils.readFileToString(f, StandardCharsets.UTF_8);
+
+        //String[] lines = content.split("\r\n");
+
+        // key : bgvyzdsv
+        // Hash: bbd0b4dcb0d07a947bf3c280f99baffd
+
+        String key = "bgvyzdsv";
+
+        int i = 0;
+
+        String keyH="";
+        String myHash="";
+        do{
+            keyH = key + "" + i;
+
+            myHash = DigestUtils.md5Hex(keyH);
+
+            if(myHash.startsWith("000000"))break;
+
+            i++;
+        }while(true);
+        System.out.println(myHash);
+        System.out.println(key + i);
+        //not bgvyzdsv15907
+
+        System.out.println("ddd");
     }
 }
