@@ -9,33 +9,12 @@ import java.util.Arrays;
 
 public class DayOne {
     public static void main(String[] args) throws IOException {
-        File f = new File("C:/Users/Stefano/Desktop/adventP.txt");
-        String content = FileUtils.readFileToString(f, StandardCharsets.UTF_8);
-
-        String[] lines = content.split("\r\n");
-
-        int[] max = new int[1000];
-        int current=0,i=0;
-        for(String s : lines){
-            if(!s.equals(""))current += Integer.parseInt(s);
-            if(s.equals("")) {
-                max[i]=current;
-                current=0;
-                i++;
-            }
-        }
-        i++;
-        max[i]=current;
-        Arrays.sort(max);
-
-        System.out.println(max[max.length-1]+" "+max[max.length-2]+" "+max[max.length-3]);
-        System.out.println("Answer 2 is:"+(max[max.length-1]+max[max.length-2]+max[max.length-3]));
-
-        System.out.println("Debug point");
+        dayOnePart1();
+        dayOnePart2();
     }
 
     public static void dayOnePart1() throws IOException {
-        File f = new File("C:/Users/Stefano/Desktop/Advent2022/advent2022_dayOne.txt");
+        File f = new File("src/main/java/adv2022/advent2022_dayOne.txt");
         String content = FileUtils.readFileToString(f, StandardCharsets.UTF_8);
 
         String[] lines = content.split("\r\n");
@@ -51,7 +30,7 @@ public class DayOne {
     }
 
     public static void dayOnePart2() throws IOException {
-        File f = new File("C:/Users/Stefano/Desktop/Advent2022/advent2022_dayOne.txt");
+        File f = new File("src/main/java/adv2022/advent2022_dayOne.txt");
         String content = FileUtils.readFileToString(f, StandardCharsets.UTF_8);
 
         String[] lines = content.split("\r\n");
@@ -70,7 +49,6 @@ public class DayOne {
         max[i]=current;
         Arrays.sort(max);
 
-        System.out.println(max[max.length-1]+" "+max[max.length-2]+" "+max[max.length-3]);
         System.out.println("Answer 2 is:"+(max[max.length-1]+max[max.length-2]+max[max.length-3]));
     }
 }
